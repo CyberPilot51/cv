@@ -1,234 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Resume/CV Design</title>
-	<link rel="stylesheet" href="styles.css">
-	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+<meta charset="UTF-8">
+<title>Funky Duck</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #87CEEB 0%, #b2e0f7 60%, #c9f7c1 60%, #8fd97a 100%);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+  }
+
+  .title {
+    text-align: center;
+    padding-top: 20px;
+    color: #333;
+    text-shadow: 2px 2px 0 #fff;
+  }
+
+  .stage {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-top: 40px;
+  }
+
+  .duck {
+    position: absolute;
+    bottom: 0;
+    left: -150px;
+    width: 140px;
+    height: 140px;
+    animation: walk 6s linear infinite, bob 0.4s ease-in-out infinite;
+  }
+
+  @keyframes walk {
+    0%   { left: -150px; transform: scaleX(1); }
+    48%  { left: 100%; transform: scaleX(1); }
+    50%  { left: 100%; transform: scaleX(-1); }
+    98%  { left: -150px; transform: scaleX(-1); }
+    100% { left: -150px; transform: scaleX(1); }
+  }
+
+  @keyframes bob {
+    0%, 100% { margin-bottom: 0px; }
+    50% { margin-bottom: 14px; }
+  }
+
+  .leg {
+    transform-origin: top center;
+    animation: strut 0.4s ease-in-out infinite;
+  }
+  .leg.back {
+    animation-delay: 0.2s;
+  }
+
+  @keyframes strut {
+    0%, 100% { transform: rotate(25deg); }
+    50% { transform: rotate(-25deg); }
+  }
+
+  .sunglasses {
+    animation: glint 2s ease-in-out infinite;
+  }
+  @keyframes glint {
+    0%, 80%, 100% { opacity: 1; }
+    90% { opacity: 0.6; }
+  }
+
+  .hat {
+    animation: tilt 1.2s ease-in-out infinite;
+    transform-origin: 70px 20px;
+  }
+  @keyframes tilt {
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(6deg); }
+  }
+
+  .wing {
+    transform-origin: 60px 70px;
+    animation: groove 0.6s ease-in-out infinite;
+  }
+  @keyframes groove {
+    0%, 100% { transform: rotate(-15deg); }
+    50% { transform: rotate(35deg); }
+  }
+
+  footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+  }
+</style>
 </head>
 <body>
 
-<div class="resume">
-   <div class="resume_left">
-     <div class="resume_profile">
-       <img src="" alt="profile_pic">
-     </div>
-     <div class="resume_content">
-       <div class="resume_item resume_info">
-         <div class="title">
-           <p class="bold">Gareth Reid</p>
-           <p class="regular">IT technician</p>
-         </div>
-         <ul>
-           <li>
-             <div class="icon">
-               <i class="fas fa-map-signs"></i>
-             </div>
-             <div class="data">
-              15 Mimosa Road Kimberley  <br /> South Africa
-             </div>
-           </li>
-           <li>
-             <div class="icon">
-               <i class="fas fa-mobile-alt"></i>
-             </div>
-             <div class="data">
-               +27 814940404
-             </div>
-           </li>
-           <li>
-             <div class="icon">
-               <i class="fas fa-envelope"></i>
-             </div>
-             <div class="data">
-               garethreid21@gmail.com
-             </div>
-           </li>
-         </ul>
-       </div>
-       <div class="resume_item resume_skills">
-         <div class="title">
-           <p class="bold">skill's</p>
-         </div>
-         <ul>
-           <li>
-             <div class="skill_name">
-               MS office
-             </div>
-             <div class="skill_progress">
-               <span style="width: 100%;"></span>
-             </div>
-             <div class="skill_per">100%</div>
-           </li>
-           <li>
-             <div class="skill_name">
-               Maintenance and Repair
-             </div>
-             <div class="skill_progress">
-               <span style="width: 89%;"></span>
-             </div>
-             <div class="skill_per">89%</div>
-           </li>
-           <li>
-             <div class="skill_name">
-               Self-motivated
-             </div>
-             <div class="skill_progress">
-               <span style="width: 85%;"></span>
-             </div>
-             <div class="skill_per">85%</div>
-           </li>
-           <li>
-             <div class="skill_name">
-               TroubleShooting Hardware
-             </div>
-             <div class="skill_progress">
-               <span style="width: 100%;"></span>
-             </div>
-             <div class="skill_per">100%</div>
-           </li>
-           <li>
-             <div class="skill_name">
-               JQUERY
-             </div>
-             <div class="skill_progress">
-               <span style="width: 88%;"></span>
-             </div>
-             <div class="skill_per">88%</div>
-           </li>
-         </ul>
-       </div>
-     </div>
-  </div>
-  <div class="resume_right">
-    <div class="resume_item resume_about">
-        <div class="title">
-           <p class="bold">About us</p>
-         </div>
-        <p>To seek and maintain full-time position that offers professional challenges utilizing interpersonal skills, excellent time management and problem-solving skills.</p>
-    </div>
-    <div class="resume_item resume_work">
-        <div class="title">
-           <p class="bold">Work Experience</p>
-         </div>
-         <div class="resume_item resume_work">
-          <div class="title">
-            <p class="bold">Community service</p>
-          </div>
-        <ul>
-            <li>
-                <div class="date"></div> 
-                <div class="info">
-                     <p class="semi-bold">SPCA Kimberley Northern Cape</p> 
-                  <p></p>
-                </div>
-            </li>
-            <li>
-              <div class="date"></div>
-              <div class="info">
-                     <p class="semi-bold"></p> 
-                  <p>Maintained clean facilities to better serve program needs</p>
-                </div>
-            </li>
-            <li>
-              <div class="date"></div>
-              <div class="info">
-                     <p class="semi-bold"></p> 
-                  <p>Performed TroubleShooting and repaitred periphrtsl devices such as printers, scanners and mobile devices</p>
-                </div>
-            </li>
-            <li>
-              <div class="date"></div>
-              <div class="info">
-                     <p class="semi-bold"></p> 
-                  <p>Set up PCs, projectors and microphones for use in video conferencing rooms</p>
-                </div>
-            </li>
-            <li>
-              <div class="date"></div>
-              <div class="info">
-                     <p class="semi-bold"></p> 
-                  <p>Patiently walked individuals through basic troubleshooting tasks</p>
-                </div>
-            </li>
-            <li>
-              <div class="date"></div>
-              <div class="info">
-                     <p class="semi-bold"></p> 
-                  <p>Imaged and prepared new computers for integration into a comapany networks and systems</p>
-                </div>
-            </li>
-            <li>
-              <div class="date"></div>
-              <div class="info">
-                     <p class="semi-bold"></p> 
-                  <p>Tested and installed motherboards, processors and graphics cards on desktops and laptops for corporate staff</p>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="resume_item resume_education">
-      <div class="title">
-           <p class="bold">Education</p>
-         </div>
-      <ul>
-            <li>
-                <div class="date">2017 - 2021</div> 
-                <div class="info">
-                     <p class="semi-bold"></p> High school diploma 
-                  <p>St Patricks CBC kimberley</p>
-                </div>
-            </li>
-            <li>
-              <div class="date">2022- current</div>
-              <div class="info">
-                     <p class="semi-bold">IT professional: Information Technology</p> 
-                  <p>IT Academy</p>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="resume_item resume_Certifications">
-      <div class="title">
-        <p class="bold">Certifications</p>
-      </div>
-    <ul>
-        <li>
-          <div class="name"></div>
-            <div class="info">
-              <p class="semi-bold">Comptia A+</p>
-            </div>
-          </li>
-          <li>
-            <div class="name">
-              <div class="info">
-                <p class="semi-bold">Comptia N+</p>
-          </li>
-          <li>
-            <div class="name">
-              <div class="info">
-                <p class="semi-bold">Comptia Server+</p>
-          </li>
-          <li>
-            <div class="name">
-              <div class="info">
-                <p class="semi-bold">Comptia Security+</p>
-          </li>
-    </ul>
-    </div>
-    <div class="resume_item resume_hobby">
-      <div class="title">
-           <p class="bold">Hobby</p>
-         </div>
-       <ul>
-         <li><i class="fas fa-book"></i></li>
-         <li><i class="fas fa-gamepad"></i></li>
-         <li><i class="fas fa-music"></i></li>
-         <li><i class="fab fa-pagelines"></i></li>
-      </ul>
-    </div>
-  </div>
+<h1 class="title">🦆 The Funkiest Duck Alive 🦆</h1>
+
+<div class="stage">
+  <svg class="duck" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- back leg -->
+    <g class="leg back">
+      <rect x="55" y="95" width="8" height="30" rx="4" fill="#ff8c00"/>
+      <polygon points="55,125 70,125 63,132 48,132" fill="#ff8c00"/>
+    </g>
+
+    <!-- front leg -->
+    <g class="leg">
+      <rect x="75" y="95" width="8" height="30" rx="4" fill="#ff8c00"/>
+      <polygon points="75,125 90,125 83,132 68,132" fill="#ff8c00"/>
+    </g>
+
+    <!-- body -->
+    <ellipse cx="70" cy="80" rx="45" ry="35" fill="#fff59d"/>
+    <ellipse cx="70" cy="80" rx="45" ry="35" fill="none" stroke="#f5d90a" stroke-width="2"/>
+
+    <!-- funky vest -->
+    <path d="M35 65 Q70 55 105 65 L100 100 Q70 110 40 100 Z" fill="#e91e63"/>
+    <circle cx="60" cy="80" r="3" fill="#ffeb3b"/>
+    <circle cx="70" cy="90" r="3" fill="#ffeb3b"/>
+    <circle cx="80" cy="80" r="3" fill="#ffeb3b"/>
+
+    <!-- wing dancing -->
+    <ellipse class="wing" cx="60" cy="75" rx="18" ry="10" fill="#fdd835"/>
+
+    <!-- neck/head -->
+    <circle cx="95" cy="45" r="22" fill="#fff59d"/>
+
+    <!-- sunglasses -->
+    <g class="sunglasses">
+      <rect x="85" y="38" width="24" height="10" rx="5" fill="#212121"/>
+      <rect x="108" y="41" width="6" height="3" fill="#212121"/>
+    </g>
+
+    <!-- beak -->
+    <polygon points="112,48 130,45 112,55" fill="#ff9800"/>
+
+    <!-- top hat -->
+    <g class="hat">
+      <rect x="80" y="10" width="26" height="20" fill="#212121"/>
+      <rect x="74" y="28" width="38" height="6" fill="#212121"/>
+      <rect x="80" y="10" width="26" height="5" fill="#e91e63"/>
+    </g>
+
+  </svg>
 </div>
+
+<footer>strut it, duck 🕺</footer>
 
 </body>
 </html>
