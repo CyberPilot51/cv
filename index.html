@@ -11,14 +11,14 @@
     background: linear-gradient(to bottom, #87CEEB 0%, #b2e0f7 60%, #c9f7c1 60%, #8fd97a 100%);
     font-family: 'Comic Sans MS', cursive, sans-serif;
   }
- 
+
   .title {
     text-align: center;
     padding-top: 20px;
     color: #333;
     text-shadow: 2px 2px 0 #fff;
   }
- 
+
   .day-banner {
     text-align: center;
     font-weight: bold;
@@ -31,18 +31,18 @@
     border-radius: 20px;
     border: 2px solid #212121;
   }
- 
+
   body {
     transition: background 0.6s ease;
   }
- 
+
   .stage {
     position: relative;
     width: 100%;
     height: 300px;
     margin-top: 40px;
   }
- 
+
   .duck-wrapper {
     position: absolute;
     bottom: 0;
@@ -50,7 +50,7 @@
     width: 140px;
     height: 160px;
   }
- 
+
   .duck {
     position: absolute;
     bottom: 0;
@@ -60,30 +60,30 @@
     animation: bob 0.4s ease-in-out infinite;
     transition: transform 0.15s ease-out;
   }
- 
+
   .duck.flipped {
     transform: scaleX(-1);
   }
- 
+
   .duck.startled {
     animation: bob 0.4s ease-in-out infinite, hop 0.35s ease-out;
   }
- 
+
   .duck.party {
     animation: bob 0.15s ease-in-out infinite, spin 0.6s linear infinite;
   }
- 
+
   @keyframes hop {
     0%   { margin-top: 0px; }
     40%  { margin-top: -35px; }
     100% { margin-top: 0px; }
   }
- 
+
   @keyframes spin {
     0% { filter: hue-rotate(0deg); }
     100% { filter: hue-rotate(360deg); }
   }
- 
+
   .hud {
     position: fixed;
     top: 14px;
@@ -95,7 +95,7 @@
     font-weight: bold;
     color: #333;
   }
- 
+
   .confetti {
     position: absolute;
     width: 8px;
@@ -104,7 +104,7 @@
     left: 50%;
     pointer-events: none;
   }
- 
+
   .duck.dragging {
     cursor: grabbing;
     transition: none !important;
@@ -116,7 +116,7 @@
     0%, 100% { transform: rotate(-8deg); }
     50% { transform: rotate(8deg); }
   }
- 
+
   .stars {
     position: absolute;
     top: -30px;
@@ -130,7 +130,7 @@
     0% { transform: translateX(-50%) rotate(0deg); }
     100% { transform: translateX(-50%) rotate(360deg); }
   }
- 
+
   .wrapper-lasso {
     animation: lassoSpin 0.3s linear infinite;
   }
@@ -138,7 +138,7 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
- 
+
   .wrapper-bow {
     animation: bowDown 0.75s ease-in-out 2;
     transform-origin: bottom center;
@@ -147,7 +147,7 @@
     0%, 100% { transform: rotate(0deg); }
     50% { transform: rotate(35deg); }
   }
- 
+
   .crumb {
     position: absolute;
     bottom: 6px;
@@ -160,7 +160,7 @@
     0% { transform: translateX(-50%) translateY(-30px) scale(0.5); opacity: 0; }
     100% { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
   }
- 
+
   .bubble {
     position: absolute;
     bottom: 100%;
@@ -179,12 +179,12 @@
   .bubble.show {
     transform: translateX(-50%) scale(1);
   }
- 
+
   @keyframes bob {
     0%, 100% { margin-bottom: 0px; }
     50% { margin-bottom: 14px; }
   }
- 
+
   .leg {
     transform-origin: top center;
     animation: strut 0.4s ease-in-out infinite;
@@ -192,12 +192,12 @@
   .leg.back {
     animation-delay: 0.2s;
   }
- 
+
   @keyframes strut {
     0%, 100% { transform: rotate(25deg); }
     50% { transform: rotate(-25deg); }
   }
- 
+
   .sunglasses {
     animation: glint 2s ease-in-out infinite;
   }
@@ -205,7 +205,7 @@
     0%, 80%, 100% { opacity: 1; }
     90% { opacity: 0.6; }
   }
- 
+
   .hat {
     animation: tilt 1.2s ease-in-out infinite;
     transform-origin: 70px 20px;
@@ -214,7 +214,7 @@
     0%, 100% { transform: rotate(-6deg); }
     50% { transform: rotate(6deg); }
   }
- 
+
   .wing {
     transform-origin: 60px 70px;
     animation: groove 0.6s ease-in-out infinite;
@@ -223,7 +223,7 @@
     0%, 100% { transform: rotate(-15deg); }
     50% { transform: rotate(35deg); }
   }
- 
+
   footer {
     position: fixed;
     bottom: 10px;
@@ -235,65 +235,65 @@
 </style>
 </head>
 <body>
- 
+
 <h1 class="title">🦆 The Funkiest Duck Alive 🦆</h1>
 <div class="day-banner" id="dayBanner">Loading today's duck...</div>
- 
+
 <div class="hud" id="hud">🍞 fed: 0</div>
- 
- 
+
+
 <div class="stage" id="stage">
  <div class="duck-wrapper" id="duckWrapper">
   <div class="bubble" id="bubble">QUACK!</div>
   <svg class="duck" id="duck" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
- 
+
     <!-- back leg -->
     <g class="leg back">
       <rect x="55" y="95" width="8" height="30" rx="4" fill="#ff8c00"/>
       <polygon points="55,125 70,125 63,132 48,132" fill="#ff8c00"/>
     </g>
- 
+
     <!-- front leg -->
     <g class="leg">
       <rect x="75" y="95" width="8" height="30" rx="4" fill="#ff8c00"/>
       <polygon points="75,125 90,125 83,132 68,132" fill="#ff8c00"/>
     </g>
- 
+
     <!-- body -->
     <ellipse cx="70" cy="80" rx="45" ry="35" fill="#fff59d"/>
     <ellipse cx="70" cy="80" rx="45" ry="35" fill="none" stroke="#f5d90a" stroke-width="2"/>
- 
+
     <!-- funky vest -->
     <path id="vestPath" d="M35 65 Q70 55 105 65 L100 100 Q70 110 40 100 Z" fill="#e91e63"/>
     <circle class="vestDot" cx="60" cy="80" r="3" fill="#ffeb3b"/>
     <circle class="vestDot" cx="70" cy="90" r="3" fill="#ffeb3b"/>
     <circle class="vestDot" cx="80" cy="80" r="3" fill="#ffeb3b"/>
- 
+
     <!-- wing dancing -->
     <ellipse class="wing" cx="60" cy="75" rx="18" ry="10" fill="#fdd835"/>
- 
+
     <!-- neck/head -->
     <circle cx="95" cy="45" r="22" fill="#fff59d"/>
- 
+
     <!-- beak -->
     <polygon points="112,48 130,45 112,55" fill="#ff9800"/>
- 
+
     <!-- daily accessory: hat/helmet/headband + eyewear, filled in by JS per day -->
     <g id="accessory"></g>
- 
+
   </svg>
  </div>
 </div>
- 
-<footer>strut it, duck 🕺 — a new duck persona and trick every day! toss crumbs, click to party, or grab & fling it.</footer>
- 
+
+<footer>strut it, duck 🕺 — a new duck persona and trick every day! feed it crumbs (but not too many...), click to party, or grab & fling it.</footer>
+
 <script>
   const stage = document.getElementById('stage');
   const wrapper = document.getElementById('duckWrapper');
   const duck = document.getElementById('duck');
   const bubble = document.getElementById('bubble');
   const hud = document.getElementById('hud');
- 
+
   let x = -150;
   let y = 0; // vertical offset for drag/fling (px, positive = up)
   let vy = 0; // vertical velocity for fling physics
@@ -313,7 +313,26 @@
   let fedCount = 0;
   let scale = 1;
   let gravityMultiplier = 1;
- 
+
+  const MAX_SCALE = 1.7;
+  const GROWTH_PER_FEEDS = 3; // grow a notch every N crumbs
+  const FAT_THRESHOLD = 9; // crumb count at which it's officially "too fat"
+
+  const WEIRD_PHRASES = [
+    "i can no longer see my feet...",
+    "i think i AM the bread now",
+    "why is the ground so far away",
+    "one more crumb and i achieve orbit",
+    "my quack has become a wheeze",
+    "i am rolling now, not walking",
+    "send help. send more bread too.",
+    "i have transcended into a dumpling"
+  ];
+
+  function randomWeirdPhrase() {
+    return WEIRD_PHRASES[Math.floor(Math.random() * WEIRD_PHRASES.length)];
+  }
+
   // ---- daily themes: a different duck persona each calendar day ----
   const THEMES = [
     {
@@ -434,10 +453,35 @@
       trick: 'bow'
     }
   ];
- 
+
   const dayIndex = Math.floor(Date.now() / 86400000) % THEMES.length;
   const theme = THEMES[dayIndex];
- 
+  const todayKey = 'funkyDuck_' + new Date().toDateString();
+
+  function saveState() {
+    try {
+      localStorage.setItem(todayKey, JSON.stringify({ fedCount, scale }));
+    } catch (e) { /* storage unavailable, ignore */ }
+  }
+
+  function loadState() {
+    try {
+      // clear out any saved state from previous days so it truly resets daily
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('funkyDuck_') && k !== todayKey) {
+          localStorage.removeItem(k);
+        }
+      }
+      const raw = localStorage.getItem(todayKey);
+      if (raw) {
+        const saved = JSON.parse(raw);
+        fedCount = saved.fedCount || 0;
+        scale = saved.scale || 1;
+      }
+    } catch (e) { /* storage unavailable, ignore */ }
+  }
+
   function applyTheme() {
     document.body.style.background = theme.bg;
     document.getElementById('vestPath').setAttribute('fill', theme.vest);
@@ -445,8 +489,9 @@
     document.getElementById('accessory').innerHTML = theme.accessory;
     document.getElementById('dayBanner').textContent = `Today's Duck: ${theme.name} ${theme.emoji}`;
   }
+  loadState();
   applyTheme();
- 
+
   // ---- tiny synth for quacks & party beeps ----
   let audioCtx = null;
   function ctx() {
@@ -476,18 +521,23 @@
     });
   }
   function playBoing() { beep({ freq: 150, slideTo: 400, dur: 0.2, type: 'sine', vol: 0.2 }); }
- 
+
   function say(text, ms = 1200) {
     bubble.textContent = text;
     bubble.classList.add('show');
     clearTimeout(bubbleTimeout);
     bubbleTimeout = setTimeout(() => bubble.classList.remove('show'), ms);
   }
- 
+
+  duck.style.transform = `scale(${scale})`;
+  updateHud();
+
   function updateHud() {
-    hud.textContent = `🍞 fed: ${fedCount}`;
+    hud.textContent = fedCount >= FAT_THRESHOLD
+      ? `🍞 fed: ${fedCount} (too full! 🥴)`
+      : `🍞 fed: ${fedCount}`;
   }
- 
+
   function burstConfetti(cx, cy, colors) {
     colors = colors || theme.confetti;
     for (let i = 0; i < 18; i++) {
@@ -498,28 +548,28 @@
       el.style.top = cy + 'px';
       el.style.borderRadius = Math.random() < 0.5 ? '50%' : '2px';
       stage.appendChild(el);
- 
+
       const angle = Math.random() * Math.PI * 2;
       const dist = 60 + Math.random() * 80;
       const tx = Math.cos(angle) * dist;
       const ty = Math.sin(angle) * dist - 40;
       const rot = (Math.random() * 720 - 360).toFixed(0);
       const duration = 700 + Math.random() * 400;
- 
+
       el.animate([
         { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
         { transform: `translate(${tx}px, ${ty}px) rotate(${rot}deg)`, opacity: 0 }
       ], { duration, easing: 'ease-out' });
- 
+
       setTimeout(() => el.remove(), duration);
     }
   }
- 
+
   stage.addEventListener('mousemove', (e) => {
     const rect = stage.getBoundingClientRect();
     mouseX = e.clientX - rect.left;
     mouseY = e.clientY - rect.top;
- 
+
     if (dragging) {
       x = mouseX - 70;
       y = Math.max(0, (stage.clientHeight - 20) - mouseY);
@@ -527,12 +577,12 @@
       wrapper.style.bottom = y + 'px';
     }
   });
- 
+
   stage.addEventListener('mouseleave', () => {
     mouseX = null;
     mouseY = null;
   });
- 
+
   window.addEventListener('mouseup', () => {
     if (dragging) {
       dragging = false;
@@ -543,7 +593,7 @@
       say('wheee!', 900);
     }
   });
- 
+
   duck.addEventListener('mousedown', (e) => {
     e.stopPropagation();
     dragging = true;
@@ -552,12 +602,12 @@
     duck.classList.add('dragging');
     clearTimeout(partyTimeout);
   });
- 
+
   stage.addEventListener('click', (e) => {
     if (e.target === duck || duck.contains(e.target)) return;
     const rect = stage.getBoundingClientRect();
     const cx = e.clientX - rect.left;
- 
+
     const el = document.createElement('div');
     el.className = 'crumb';
     el.textContent = '🍞';
@@ -565,20 +615,20 @@
     stage.appendChild(el);
     crumbs.push({ el, x: cx });
   });
- 
+
   duck.addEventListener('click', (e) => {
     e.stopPropagation();
     if (dragging) return;
     partying = true;
     say(theme.partyPhrase, 1500);
- 
+
     const rect = wrapper.getBoundingClientRect();
     const stageRect = stage.getBoundingClientRect();
     const burstX = rect.left - stageRect.left + 70;
     const burstY = rect.top - stageRect.top + 60;
- 
+
     clearTimeout(partyTimeout);
- 
+
     switch (theme.trick) {
       case 'cannon': // pirate: double cannon-blast confetti
         duck.classList.add('party');
@@ -587,7 +637,7 @@
         setTimeout(() => { playBoing(); burstConfetti(burstX, burstY); }, 300);
         partyTimeout = setTimeout(() => { partying = false; duck.classList.remove('party'); }, 2200);
         break;
- 
+
       case 'moonwalk': // astronaut: floaty low-gravity for the next fling
         duck.classList.add('party');
         playParty();
@@ -600,7 +650,7 @@
           gravityMultiplier = 1;
         }, 2500);
         break;
- 
+
       case 'lasso': // cowboy: fast wrapper spin, no hue-rotate
         wrapper.classList.add('wrapper-lasso');
         playParty();
@@ -610,7 +660,7 @@
           wrapper.classList.remove('wrapper-lasso');
         }, 1600);
         break;
- 
+
       case 'poof': // wizard: vanish and teleport
       case 'smoke': // ninja: same mechanic, different flavor
         duck.classList.add('party');
@@ -628,7 +678,7 @@
         }, 400);
         partyTimeout = setTimeout(() => { partying = false; duck.classList.remove('party'); }, 2200);
         break;
- 
+
       case 'bow': // royal: a formal bow, no spin
         wrapper.classList.add('wrapper-bow');
         playParty();
@@ -638,7 +688,7 @@
           wrapper.classList.remove('wrapper-bow');
         }, 1600);
         break;
- 
+
       default: // disco: classic hue-rotating spin
         duck.classList.add('party');
         playParty();
@@ -646,7 +696,7 @@
         partyTimeout = setTimeout(() => { partying = false; duck.classList.remove('party'); }, 2000);
     }
   });
- 
+
   function nearestCrumb(duckCenter) {
     if (crumbs.length === 0) return null;
     let best = null;
@@ -657,18 +707,18 @@
     }
     return best;
   }
- 
+
   function tick() {
     const now = performance.now ? performance.now() : Date.now();
     const stageWidth = stage.clientWidth;
     const duckCenter = x + 70;
- 
+
     // Dragging: position already handled by mousemove; just keep looping
     if (dragging) {
       requestAnimationFrame(tick);
       return;
     }
- 
+
     // Flinging: simple gravity fall back to ground
     if (flinging) {
       vy -= 1.2 * gravityMultiplier;
@@ -692,18 +742,18 @@
       requestAnimationFrame(tick);
       return;
     }
- 
+
     if (now < eatingUntil) {
       requestAnimationFrame(tick);
       return;
     }
- 
+
     // Priority 1: flee the mouse
     if (mouseX !== null && !partying) {
       const dx = mouseX - duckCenter;
       const dy = (mouseY ?? 300) - 260;
       const dist = Math.sqrt(dx * dx + dy * dy);
- 
+
       if (dist < 90) {
         if (!fleeing) {
           fleeing = true;
@@ -713,7 +763,7 @@
           setTimeout(() => duck.classList.remove('startled'), 350);
         }
         dir = dx > 0 ? -1 : 1;
-        speed = baseSpeed * 3.2;
+        speed = (baseSpeed * 3.2) / scale;
         x += dir * speed;
         x = Math.max(-140, Math.min(stageWidth - 20, x));
         wrapper.style.left = x + 'px';
@@ -725,7 +775,7 @@
         fleeing = false;
       }
     }
- 
+
     // Priority 2: seek the nearest crumb
     if (!partying) {
       const target = nearestCrumb(duckCenter);
@@ -739,19 +789,28 @@
           duck.classList.add('startled');
           setTimeout(() => duck.classList.remove('startled'), 350);
           eatingUntil = now + 500;
- 
+
           fedCount++;
           updateHud();
-          if (fedCount % 3 === 0 && scale < 1.5) {
-            scale += 0.12;
+
+          if (fedCount >= FAT_THRESHOLD) {
+            scale = MAX_SCALE;
+            duck.style.transform = duck.classList.contains('flipped')
+              ? `scaleX(-${scale}) scaleY(${scale})`
+              : `scale(${scale})`;
+            say(randomWeirdPhrase(), 1600);
+          } else if (fedCount % GROWTH_PER_FEEDS === 0 && scale < MAX_SCALE) {
+            scale = Math.min(MAX_SCALE, scale + 0.15);
             duck.style.transform = duck.classList.contains('flipped')
               ? `scaleX(-${scale}) scaleY(${scale})`
               : `scale(${scale})`;
             say('*burp* getting chubby! 🍗', 1100);
           }
+
+          saveState();
         } else {
           dir = diff > 0 ? 1 : -1;
-          speed = baseSpeed * 1.8;
+          speed = (baseSpeed * 1.8) / scale;
           x += dir * speed;
           duck.classList.toggle('flipped', dir === -1);
           duck.style.transform = dir === -1 ? `scaleX(-${scale}) scaleY(${scale})` : `scale(${scale})`;
@@ -761,26 +820,25 @@
         return;
       }
     }
- 
+
     // Default: idle wander
     if (!partying) {
-      speed = baseSpeed;
+      speed = baseSpeed / scale;
       x += dir * speed;
- 
+
       if (x > stageWidth - 20) dir = -1;
       else if (x < -140) dir = 1;
- 
+
       wrapper.style.left = x + 'px';
       duck.classList.toggle('flipped', dir === -1);
       duck.style.transform = dir === -1 ? `scaleX(-${scale}) scaleY(${scale})` : `scale(${scale})`;
     }
- 
+
     requestAnimationFrame(tick);
   }
- 
+
   requestAnimationFrame(tick);
 </script>
- 
+
 </body>
 </html>
- 
