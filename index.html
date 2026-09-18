@@ -59,7 +59,7 @@
     height: 140px;
     cursor: pointer;
     animation: bob 0.4s ease-in-out infinite;
-    transition: transform 0.15s ease-out;
+    transition: transform 0.3s ease-out;
   }
 
   .duck.flipped {
@@ -295,7 +295,7 @@
  </div>
 </div>
 
-<footer>strut it, duck 🕺 — a new persona daily! feed it (watch for golden crumbs ✨), click to party, grab &amp; fling it, hit spacebar to hop... and keep an eye on the sky.</footer>
+<footer>strut it, duck 🕺 — a new persona daily! feed it crumbs (but not too many... it WILL pop), watch for golden ones ✨, click to party, grab &amp; fling it, hit spacebar to hop.</footer>
 
 <script>
   const stage = document.getElementById('stage');
@@ -328,6 +328,7 @@
   const MAX_SCALE = 1.7;
   const GROWTH_PER_FEEDS = 3; // grow a notch every N crumbs
   const FAT_THRESHOLD = 9; // crumb count at which it's officially "too fat"
+  const EXTREME_THRESHOLD = 16; // crumb count at which the duck actually pops
 
   const WEIRD_PHRASES = [
     "i can no longer see my feet...",
@@ -371,16 +372,27 @@
 
   function popAccessoryOff(animate) {
     const acc = document.getElementById('accessory');
+    acc.getAnimations().forEach(a => a.cancel());
     if (animate) {
       acc.animate([
         { transform: 'translate(0px,0px) rotate(0deg)', opacity: 1 },
         { transform: 'translate(50px,-70px) rotate(220deg)', opacity: 0 }
-      ], { duration: 550, easing: 'ease-out', fill: 'forwards' });
-      setTimeout(() => { acc.style.display = 'none'; }, 550);
+      ], { duration: 550, easing: 'ease-out' });
+      setTimeout(() => { acc.style.opacity = '0'; acc.style.display = 'none'; }, 550);
     } else {
       acc.style.display = 'none';
     }
     accessoryPopped = true;
+  }
+
+  function popDuckBurst(cx, cy) {
+    // a bigger, whiter "explosion" burst than the party confetti, plus a quick squash flash
+    burstConfetti(cx, cy, ['#ffffff', '#f0f0f0', '#ffe082', '#ffab91']);
+    duck.animate([
+      { transform: 'scale(1.15)', opacity: 1 },
+      { transform: 'scale(0.05)', opacity: 0.2 },
+      { transform: 'scale(1)', opacity: 1 }
+    ], { duration: 400, easing: 'ease-in-out' });
   }
   function randomHiccup() {
     return HICCUP_PHRASES[Math.floor(Math.random() * HICCUP_PHRASES.length)];
@@ -884,19 +896,48 @@
             fedCount++;
             updateHud();
 
-            if (fedCount >= FAT_THRESHOLD) {
+            if (fedCount >= EXTREME_THRESHOLD) {
+              // POP! the duck well and truly explodes and resets
+              const rect = wrapper.getBoundingClientRect();
+              const stageRect = stage.getBoundingClientRect();
+              const px = rect.left - stageRect.left + 70;
+              const py = rect.top - stageRect.top + 60;
+              playPop();
+              popDuckBurst(px, py);
+              fedCount = 3;
+              scale = 1.15;
+              duck.style.transform = duck.classList.contains('flipped')
+                ? `scaleX(-${scale}) scaleY(${scale})`
+                : `scale(${scale})`;
+              updateWobble();
+              say('POP! ...worth it. 🫠', 1800);
+              updateHud();
+              if (accessoryPopped) {
+                const acc = document.getElementById('accessory');
+                acc.getAnimations().forEach(a => a.cancel());
+                acc.style.display = '';
+                acc.style.opacity = '1';
+                acc.animate([
+                  { transform: 'translate(30px,-40px) rotate(-160deg)', opacity: 0 },
+                  { transform: 'translate(0px,0px) rotate(0deg)', opacity: 1 }
+                ], { duration: 450, easing: 'ease-out' });
+                accessoryPopped = false;
+              }
+            } else if (fedCount >= FAT_THRESHOLD) {
               scale = MAX_SCALE;
               duck.style.transform = duck.classList.contains('flipped')
                 ? `scaleX(-${scale}) scaleY(${scale})`
                 : `scale(${scale})`;
               updateWobble();
-              if (!accessoryPopped) {
-                popAccessoryOff(true);
-                playPop();
-                say('*POP* ...my outfit! my dignity!', 1800);
-              } else {
-                say(randomWeirdPhrase(), 1600);
-              }
+              setTimeout(() => {
+                if (!accessoryPopped) {
+                  popAccessoryOff(true);
+                  playPop();
+                  say('*POP* ...my outfit! my dignity!', 1800);
+                } else {
+                  say(randomWeirdPhrase(), 1600);
+                }
+              }, 220);
             } else if (fedCount % GROWTH_PER_FEEDS === 0 && scale < MAX_SCALE) {
               scale = Math.min(MAX_SCALE, scale + 0.15);
               duck.style.transform = duck.classList.contains('flipped')
@@ -971,6 +1012,12 @@
   // ---- rare random event: a UFO swoops in and abducts the duck ----
   function triggerUFO() {
     if (partying || dragging || flinging || abducted) return;
+    // don't interrupt if the mouse is actively near/chasing the duck right now
+    if (mouseX !== null) {
+      const dx = mouseX - (x + 70);
+      const dy = (mouseY ?? 300) - 260;
+      if (Math.sqrt(dx * dx + dy * dy) < 220) return;
+    }
     abducted = true;
     partying = true; // borrow this flag to pause normal wander/flee/seek AI
 
@@ -1035,7 +1082,7 @@
   }
 
   function scheduleUFO() {
-    const delay = 12000 + Math.random() * 13000; // every 12-25s
+    const delay = 30000 + Math.random() * 30000; // every 30-60s
     setTimeout(() => {
       triggerUFO();
       scheduleUFO();
